@@ -9,13 +9,16 @@ from typing import List
 # @lc code=start
 class Solution:
     def jump(self, nums: List[int]) -> int:
+        # 使用贪心算法
         n = len(nums)
-        maxPos, end, step = 0, 0, 0
+        # max_position记录下一跳可以跳到的最远位置
+        # cur_step_border记录当前跳数内的可选范围
+        max_position, cur_step_border, step = 0, 0, 0
         for i in range(n - 1):
-            if maxPos >= i:
-                maxPos = max(maxPos, i + nums[i])
-                if i == end:
-                    end = maxPos
+            if max_position >= i:
+                max_position = max(max_position, i + nums[i])
+                if i == cur_step_border:
+                    cur_step_border = max_position
                     step += 1     
         return step
 # @lc code=end
